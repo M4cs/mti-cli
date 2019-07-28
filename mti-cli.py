@@ -33,7 +33,6 @@ https://macthemes.co.""")
         while count <= file_count - 1:
             theme.grab_new_app()
             theme.set_icon()
-            bar.update(1)
             count = count + 1
         os.system('killall Dock && killall Finder')
     if args.uninstall:
