@@ -25,20 +25,22 @@ class Themer:
                                 return
     def set_icon(self):
         if os.path.exists('/System/Applications/{}.app'.format(self.current_app)):
-            # print('bins/fileicon "/System/Applications/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
-            os.system('bins/fileicon set "/System/Applications/{}.app"'.format(self.current_app))
+            # print('/usr/local/bin/fileicon "/System/Applications/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
+            os.system('/usr/local/bin/fileicon set "/System/Applications/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
         elif os.path.exists('/Applications/{}.app'.format(self.current_app)):
-            os.system('bins/fileicon set "/Applications/{}.app"'.format(self.current_app))
+            os.system('/usr/local/bin/fileicon set "/Applications/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
+        elif os.path.exists('/System/Library/CoreServices/{}.app'.format(self.current_app)):
+            os.system('/usr/local/bin/fileicon set "/System/Library/CoreServices/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
         else:
             print('User Missing Application: %s' % self.current_app)
     
     def unset_icon(self):
         if os.path.exists('/System/Applications/{}.app'.format(self.current_app)):
-            # print('bins/fileicon "/System/Applications/{}.app" "{}"'.format(self.current_app, os.path.realpath(self.folder_path + '/' + self.current_app + '.png')))
-            os.system('bins/fileicon rm "/System/Applications/{}.app"'.format(self.current_app))
+            os.system('/usr/local/bin/fileicon rm "/System/Applications/{}.app"'.format(self.current_app))
         elif os.path.exists('/Applications/{}.app'.format(self.current_app)):
-            os.system('bins/fileicon rm "/Applications/{}.app"'.format(self.current_app))
-
+            os.system('/usr/local/bin/fileicon rm "/Applications/{}.app"'.format(self.current_app))
+        elif os.path.exists('/System/Library/CoreServices/{}.app'.format(self.current_app)):
+            os.system('/usr/local/bin/fileicon rm "/Applications/{}.app"'.format(self.current_app))
                         
 
     def file_count(self):
