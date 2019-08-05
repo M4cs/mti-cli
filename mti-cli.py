@@ -34,22 +34,13 @@ https://macthemes.co.""")
             theme.grab_new_app()
             theme.set_icon()
             count = count + 1
-        os.system('killall Dock && killall Finder')
+        os.system('sudo rm -rfv /Library/Caches/com.apple.iconservices.store; sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -or -name com.apple.iconservices \) -exec rm -rfv {} \; >> /dev/null ; sleep 3;sudo touch /Applications/* ; killall Dock; killall Finder; echo Done')
     if args.uninstall:
         if args.install:
             sys.exit('Cannot uninstall and install at same time!')
-        if args.theme_bundle:
-            theme_bundle = args.theme_bundle
-        else:
-            sys.exit('No Theme Bundle Specified!')
-        theme = Themer(theme_bundle)
-        file_count = theme.file_count()
-        count = 0
-        while count <= file_count - 1:
-            theme.grab_new_app()
-            theme.unset_icon()
-            count = count + 1
-        os.system('killall Dock && killall Finder')
+        theme = Themer('')
+        theme.uninstall()
+        os.system('sudo rm -rfv /Library/Caches/com.apple.iconservices.store; sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -or -name com.apple.iconservices \) -exec rm -rfv {} \; >> /dev/null ; sleep 3;sudo touch /Applications/* ; killall Dock; killall Finder; echo Done')
     if args.check:
         if args.install:
             sys.exit('Cannot Check and Install!')

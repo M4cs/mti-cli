@@ -62,3 +62,25 @@ class Themer:
             sys.exit(0)
         except KeyError:
             sys.exit(1)
+
+    def uninstall(self):
+        fileslist = []
+        print('Uninstalling...')
+        path, dirs, files = next(os.walk('/Applications'))
+        for i in dirs:
+            if '.app' in i:
+                fileslist.append(os.path.realpath('/System/Applications/' + i))
+        path, dirs, files = next(os.walk('/System/Applications'))
+        for i in dirs:
+            if '.app' in i:
+                fileslist.append(os.path.realpath('/System/Applications/' + i))
+        path, dirs, files = next(os.walk('/System/Volumes/Data/Applications'))
+        for i in dirs:
+            if '.app' in i:
+                fileslist.append(os.path.realpath('/System/Volumes/Data/Applications/' + i))
+        path, dirs, files = next(os.walk('~/Applications'))
+        for i in dirs:
+            if '.app' in i:
+                fileslist.append(os.path.realpath('~/Applications/' + i))
+        for file in fileslist:
+            os.system('/usr/local/bin/fileicon rm {}'.format(file))
